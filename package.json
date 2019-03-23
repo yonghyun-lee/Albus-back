@@ -1,0 +1,8 @@
+{
+  "name": "Gallery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:yonghyunlee/gallery.git",
+  "author": "leeyonghyun <mi161776@hanbat.ac.kr>",
+  "license": "MIT"
+}
