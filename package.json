@@ -5,8 +5,13 @@
   "repository": "git@gitlab.com:yonghyunlee/gallery.git",
   "author": "leeyonghyun <mi161776@hanbat.ac.kr>",
   "license": "MIT",
+  "scripts": {
+    "test": "ts-node ./src/server.ts",
+    "start": "ts-node ./src/server.ts"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.4",
+    "@types/pg": "^7.4.14",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
     "typescript": "^3.4.1"
@@ -14,6 +19,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "pg": "^7.9.0"
   }
 }
