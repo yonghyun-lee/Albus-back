@@ -4,5 +4,16 @@
   "main": "index.js",
   "repository": "git@gitlab.com:yonghyunlee/gallery.git",
   "author": "leeyonghyun <mi161776@hanbat.ac.kr>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.4.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4"
+  }
 }
