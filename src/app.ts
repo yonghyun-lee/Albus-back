@@ -8,7 +8,7 @@ class App {
   public app: express.Application;
   public port: number;
 
-  constructor(controllers:[], port:number) {
+  constructor(controllers:Array<object>, port:number) {
     this.app = express();
     this.port = port;
     this.initializeMiddleware();
@@ -24,7 +24,7 @@ class App {
     this.app.use(express.static('public'));
   }
 
-  private initializeControllers(controllers: any) {
+  private initializeControllers(controllers: Array<object>) {
     controllers.forEach((controller: any) => {
       this.app.use('/', controller.router);
     });
