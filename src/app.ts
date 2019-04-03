@@ -8,10 +8,11 @@ class App {
   public app: express.Application;
   public port: number;
 
-  constructor(port:number) {
+  constructor(controllers:[], port:number) {
     this.app = express();
     this.port = port;
     this.initializeMiddleware();
+    this.initializeControllers(controllers);
     this.initializeErrorHandling();
   }
 
