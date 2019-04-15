@@ -1,7 +1,7 @@
 import {Pool} from "pg";
 import 'dotenv/config';
 
-class AccessPostgresql {
+class AccessDB {
   private pool: Pool;
 
   constructor() {
@@ -54,4 +54,4 @@ class AccessPostgresql {
 
 }
 
-export const pg = new AccessPostgresql();
+export const pg = new AccessDB();

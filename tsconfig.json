@@ -7,7 +7,13 @@
       "es6"
     ],
     "baseUrl": "src",
-    "paths": {},
+    "paths": {
+      "@controllers/*": ["controllers/*"],
+      "@dto/*": ["dto/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@interface/*": ["interface/*"],
+      "@middleware/*": ["middleware/*"]
+    },
     "declaration": true,
     "sourceMap": true,
     "inlineSources": true,

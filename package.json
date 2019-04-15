@@ -9,6 +9,13 @@
     "test": "ts-node ./src/server.ts",
     "start": "ts-node ./src/server.ts"
   },
+  "_moduleAliases": {
+    "@controllers": "src/controllers",
+    "@dto": "src/dto",
+    "@exceptions": "src/exceptions",
+    "@interface": "src/interface",
+    "@middleware": "src/middleware"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.4",
     "@types/pg": "^7.4.14",

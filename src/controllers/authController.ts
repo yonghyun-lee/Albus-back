@@ -1,9 +1,8 @@
-import Controller from "../interface/controller.interface";
+import Controller from "@interface/controller.interface";
 import * as express from "express";
-import {validationMiddleware} from "../middlewares/validation.middleware";
-import RequestWithUser from "../interface/requestWithUser.interface";
-import UserBodySchemaDto from "../dto/UserBodySchema.dto";
-import {pg} from "../postgresql";
+import {validationMiddleware} from "@middleware/validation.middleware";
+import RequestWithUser from "@interface/requestWithUser.interface";
+import UserBodySchemaDto from "@dto/UserBodySchema.dto";
 
 class AuthenticationController implements Controller {
   public path = '/auth';

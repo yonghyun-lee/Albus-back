@@ -1,4 +1,4 @@
-import {IsEmail, IsString, Length, MinLength} from 'class-validator';
+import {IsEmail, Length, MinLength} from 'class-validator';
 
 class UserBodySchemaDto {
 

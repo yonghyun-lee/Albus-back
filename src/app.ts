@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from "body-parser";
-import errorMiddleware from "./middlewares/error.middleware";
+import errorMiddleware from "@middleware/error.middleware";
 
 class App {
 
