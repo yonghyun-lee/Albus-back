@@ -8,6 +8,7 @@
     ],
     "baseUrl": "src",
     "paths": {
+      "@src/*": ["./*"],
       "@controllers/*": ["controllers/*"],
       "@dto/*": ["dto/*"],
       "@exceptions/*": ["exceptions/*"],

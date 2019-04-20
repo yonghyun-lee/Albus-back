@@ -9,30 +9,30 @@ export const createUserTable = async () => {
   const queryUserText =
     `CREATE TABLE IF NOT EXISTS
       users (
-        id UUID PRIMARY KEY,
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         username VARCHAR(30) NOT NULL UNIQUE,
-        password VARCHAR(30) NOT NULL,
-        email VARCHAR(40) NOT NULL UNIQUE
+        password text not null,
+        email text not null unique
       )`;
 
   const queryUserProfileText =
     `CREATE TABLE IF NOT EXISTS
       user_profiles (
-        id UUID PRIMARY KEY,
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         user_id UUID NULL,
         thumbnail text,
-        email VARCHAR(40) NOT NULL UNIQUE,
+        email text not null unique,
         constraint user_id_fk foreign key(user_id) references users(id)
       )`;
 
   const querySocialAccountsText =
     `CREATE TABLE IF NOT EXISTS
       social_accounts (
-        id UUID PRIMARY KEY,
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         user_id UUID NOT NULL,
         social_id VARCHAR(30) NOT NULL,
-        access_token VARCHAR(40),
-        email VARCHAR(40) NOT NULL UNIQUE
+        access_token text,
+        email text not null unique
       )`;
 
   try {

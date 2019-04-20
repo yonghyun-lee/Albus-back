@@ -16,7 +16,7 @@ class AccessDB {
     }
   }
 
-  public selectQuery = async (sql: string, param: [string]) => {
+  public selectQuery = async (sql: string, ...param: string[]) => {
     const client = await this.pool.connect();
 
     try {
@@ -30,7 +30,7 @@ class AccessDB {
     }
   };
 
-  public txQuery  = async (sql: string, param: [string]) => {
+  public txQuery  = async (sql: string, ...param: string[]) => {
     const client = await this.pool.connect();
 
     try {
@@ -54,4 +54,4 @@ class AccessDB {
 
 }
 
-export const pg = new AccessDB();
+export const db = new AccessDB();
