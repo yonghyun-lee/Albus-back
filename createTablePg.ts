@@ -12,17 +12,8 @@ export const createUserTable = async () => {
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         username VARCHAR(30) NOT NULL UNIQUE,
         password text not null,
-        email text not null unique
-      )`;
-
-  const queryUserProfileText =
-    `CREATE TABLE IF NOT EXISTS
-      user_profiles (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        user_id UUID,
         thumbnail text,
-        email text not null unique,
-        constraint user_id_fk foreign key(user_id) references users(id)
+        email text not null unique
       )`;
 
   const querySocialAccountsText =
@@ -39,7 +30,6 @@ export const createUserTable = async () => {
     console.log("start...");
     await client.query('BEGIN');
     await client.query(queryUserText);
-    await client.query(queryUserProfileText);
     await client.query(querySocialAccountsText);
     await client.query('COMMIT');
     console.log("success create user Table");

@@ -34,7 +34,12 @@ class AuthenticationController implements Controller {
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await db.txQuery(`INSERT INTO users(username, password, email) VALUES($1, $2, $3)`, username, hashedPassword, email);
+        await db.txQuery(
+          `INSERT INTO users(username, password, email) VALUES($1, $2, $3)`,
+          username,
+          hashedPassword,
+          email
+        );
 
         res.sendStatus(200);
       }
