@@ -3,10 +3,9 @@ import * as express from "express";
 import {validationMiddleware} from "@middleware/validation.middleware";
 import RequestWithUser from "@interface/requestWithUser.interface";
 import UserBodySchemaDto from "@dto/UserBodySchema.dto";
-import { db } from "@src/postgresql";
+import { db } from "@src/lib/postgresql";
 import UsernameAlreadyExistsException from "@exceptions/UsernameAlreadyExistsException";
 import EmailAlreadyExistsException from "@exceptions/EmailAlreadyExistsException";
-import {response} from "express";
 import * as bcrypt from "bcrypt";
 
 class AuthenticationController implements Controller {

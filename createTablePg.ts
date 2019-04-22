@@ -19,7 +19,7 @@ export const createUserTable = async () => {
     `CREATE TABLE IF NOT EXISTS
       user_profiles (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        user_id UUID NULL,
+        user_id UUID,
         thumbnail text,
         email text not null unique,
         constraint user_id_fk foreign key(user_id) references users(id)
