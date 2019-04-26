@@ -20,11 +20,11 @@ class AuthenticationController implements Controller {
 
   private initializeRoutes() {
     this.router.post(`${this.path}/register/local`, validationMiddleware(UserBodyDto), this.registerLocalAccount);
+    this.router.post(`${this.path}/register/social/:platform`, validationMiddleware(SocialRegisterBodyDto), this.socialRegister);
   }
 
   private registerLocalAccount = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
     const {username, password, email}: UserBodyDto = req.body;
-
 
     const isUsername = await db.selectQuery(`SELECT * FROM users WHERE username=$1`, username);
     const isEmail = await db.selectQuery(`SELECT * FROM users WHERE email=$1`, email);
@@ -48,6 +48,7 @@ class AuthenticationController implements Controller {
       }
     } catch (e) {
       next(new InternalServerException(e));
+
     }
   };
 
@@ -56,8 +57,10 @@ class AuthenticationController implements Controller {
 
     try {
 
-    } catch (e) {
+      
 
+    } catch (e) {
+      next(new InternalServerException(e));
     }
   };
 

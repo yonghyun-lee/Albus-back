@@ -1,8 +1,10 @@
-import {IsEmail, Length, MinLength} from 'class-validator';
+import {IsEmail, Length, Matches, MaxLength, MinLength} from 'class-validator';
 
 class UserBodyDto {
 
-  @Length(3, 20)
+  @Matches(/^[a-z0-9-_]+$/)
+  @MinLength(3)
+  @MaxLength(16)
   public username: string;
 
   @MinLength(3)
