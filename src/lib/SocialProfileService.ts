@@ -33,3 +33,5 @@ class SocialProfileService {
     }))
   }
 }
+
+export const socialService = new SocialProfileService();
