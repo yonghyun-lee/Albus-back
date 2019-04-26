@@ -2,7 +2,7 @@ import Controller from "@interface/controller.interface";
 import * as express from "express";
 import {validationMiddleware} from "@middleware/validation.middleware";
 import RequestWithUser from "@interface/requestWithUser.interface";
-import UserBodySchemaDto from "@dto/UserBodySchema.dto";
+import UserBodyDto from "@dto/UserBody.dto";
 import { db } from "@src/lib/postgresql";
 import UsernameAlreadyExistsException from "@exceptions/UsernameAlreadyExistsException";
 import EmailAlreadyExistsException from "@exceptions/EmailAlreadyExistsException";
@@ -17,11 +17,11 @@ class AuthenticationController implements Controller {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/register/local`, validationMiddleware(UserBodySchemaDto), this.registerLocalAccount);
+    this.router.post(`${this.path}/register/local`, validationMiddleware(UserBodyDto), this.registerLocalAccount);
   }
 
   private registerLocalAccount = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
-    const {username, password, email}: UserBodySchemaDto = req.body;
+    const {username, password, email}: UserBodyDto = req.body;
 
     try {
       const isUsername = await db.selectQuery(`SELECT * FROM users WHERE username=$1`, username);
@@ -47,7 +47,11 @@ class AuthenticationController implements Controller {
       console.error(e);
       res.sendStatus(500);
     }
-  }
+  };
+
+  private socialRegister = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
+
+  };
 
 }
 

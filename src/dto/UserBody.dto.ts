@@ -1,6 +1,6 @@
 import {IsEmail, Length, MinLength} from 'class-validator';
 
-class UserBodySchemaDto {
+class UserBodyDto {
 
   @Length(3, 20)
   public username: string;
@@ -12,4 +12,4 @@ class UserBodySchemaDto {
   public email: string;
 }
 
-export default UserBodySchemaDto;
+export default UserBodyDto;
