@@ -27,28 +27,14 @@ class AuthenticationController implements Controller {
   }
 
   private registerLocalAccount = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
-    const {username, password, email}: UserBodyDto = req.body;
+    const {username, email}: UserBodyDto = req.body;
 
     const isUsername = await db.selectQuery(`SELECT * FROM users WHERE username=$1`, username);
     const isEmail = await db.selectQuery(`SELECT * FROM users WHERE email=$1`, email);
 
     try {
-      if (isEmail.length) {
-        next(new EmailAlreadyExistsException(email));
-      } else if (isUsername.length) {
-        next(new UsernameAlreadyExistsException(username));
-      } else {
-        const hashedPassword = await bcrypt.hash(password, 10);
+      // todo 이메일 인증을 통한 회원가입
 
-        await db.txQuery(
-          `INSERT INTO users(username, password, email) VALUES($1, $2, $3)`,
-          username,
-          hashedPassword,
-          email
-        );
-
-        res.sendStatus(200);
-      }
     } catch (e) {
       next(new InternalServerException(e));
 
@@ -95,7 +81,18 @@ class AuthenticationController implements Controller {
         return next(new SocialAccountAlreadyExistsException());
       }
 
+      console.log(accessToken, fallbackEmail, profile)
+
       // todo 저장, 썸네일 다운, ...
+
+      // await db.txQuery(
+      //   `INSERT INTO users
+      //   (username, email, is_certified)
+      //   VALUES($1, $2, $3)`,
+      //   username,
+      //   email,
+      //   !!email ? 'true' : 'false'
+      // );
 
     } catch (e) {
       next(new InternalServerException(e));
