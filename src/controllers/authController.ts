@@ -11,7 +11,6 @@ import SocialRegisterBodyDto from "@dto/SocialRegisterBody.dto";
 import InternalServerException from "@exceptions/InternalServerException";
 import {socialService} from "@src/lib/SocialProfileService";
 import WrongCredentialsException from "@exceptions/WrongCredentialsException";
-import User from "@interface/user.interface";
 import SocialAccountAlreadyExistsException from "@exceptions/SocialAccountAlreadyExistsException";
 
 class AuthenticationController implements Controller {

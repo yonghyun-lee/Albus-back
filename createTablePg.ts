@@ -12,8 +12,9 @@ export const createUserTable = async () => {
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         username VARCHAR(30) NOT NULL UNIQUE,
         password text not null,
-        thumbnail text,
-        email text not null unique
+        thumbnail text DEFAULT null,
+        email text not null unique,
+        is_certified boolean DEFAULT false
       )`;
 
   const querySocialAccountsText =
