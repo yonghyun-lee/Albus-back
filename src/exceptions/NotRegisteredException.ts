@@ -1,9 +1,9 @@
 import HttpException from './HttpException';
 
-class UsernameAlreadyExistsException extends HttpException {
-  constructor(username: string) {
-    super(400, `username ${username} already exists`);
+class NotRegisteredException extends HttpException {
+  constructor(email: string) {
+    super(401, `Not Registered ${email}`);
   }
 }
 
-export default UsernameAlreadyExistsException;
+export default NotRegisteredException;

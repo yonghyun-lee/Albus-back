@@ -1,14 +1,8 @@
 import { IsString } from 'class-validator';
 
-class LogInDto {
+class SocialLogInDto {
   @IsString()
-  public grant_type: string;
-
-  @IsString()
-  public username: string;
-
-  @IsString()
-  public password: string;
+  public accessToken: string;
 }
 
-export default LogInDto;
+export default SocialLogInDto;

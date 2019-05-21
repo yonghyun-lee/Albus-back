@@ -22,8 +22,7 @@ export const createUserTable = async () => {
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         user_id UUID NOT NULL,
         social_id VARCHAR(30) NOT NULL,
-        access_token text,
-        email text not null unique
+        access_token text
       )`;
 
   try {

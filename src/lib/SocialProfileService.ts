@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import SocialProfileInterface from "@interface/socialProfile.interface";
+import 'dotenv/config';
 
 class SocialProfileService {
 
