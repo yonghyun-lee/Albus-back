@@ -6,7 +6,7 @@
   "author": "leeyonghyun <mi161776@hanbat.ac.kr>",
   "license": "MIT",
   "scripts": {
-    "test": "ts-node ./src/server.ts",
+    "test": "NODE_ENV=development ts-node ./src/server.ts",
     "start": "ts-node ./src/server.ts"
   },
   "_moduleAliases": {

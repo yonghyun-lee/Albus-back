@@ -14,6 +14,8 @@ import SocialAccountAlreadyExistsException from "@exceptions/SocialAccountAlread
 import SocialLogInDto from "@dto/logIn.dto";
 import SocialProfileInterface from "@interface/socialProfile.interface";
 import NotRegisteredException from "@exceptions/NotRegisteredException";
+import Token from "@src/lib/token";
+import User from "@interface/user.interface";
 
 class AuthenticationController implements Controller {
   public path = '/auth';
@@ -77,27 +79,26 @@ class AuthenticationController implements Controller {
         );
       }
 
-      const userProfile = user[0];
-      console.log(userProfile);
+      const userInfo: User = user[0];
+      console.log(userInfo);
+      const token = await Token.generateLoginToken(userInfo);
+
       res.sendStatus(200);
-      // const token = await user.generateToken();
-      //
-      // ctx.body = {
-      //   user: {
-      //     id: user.id,
-      //     username: user.username,
-      //     displayName: userProfile.display_name,
-      //     thumbnail: userProfile.thumbnail,
-      //   },
-      //   token,
-      // };
-      //
-      // // $FlowFixMe: intersection bug
-      // ctx.cookies.set('access_token', token, {
-      //   httpOnly: true,
-      //   maxAge: 1000 * 60 * 60 * 24 * 7,
-      //   domain: process.env.NODE_ENV === 'development' ? undefined : '.velog.io',
-      // });
+
+      res.cookie('access_token', token, {
+        httpOnly: true, // XSS 방지
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7d
+        domain: process.env.NODE_ENV === 'development' ? undefined : 'albus.io',
+      });
+
+      res.json({
+        user: {
+          id: userInfo.id,
+          username: userInfo.username,
+          thumbnail: userInfo.thumbnail
+        },
+        token
+      });
     } catch (e) {
       res.sendStatus(500);
     }

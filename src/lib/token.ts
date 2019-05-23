@@ -43,15 +43,7 @@ class Token {
 
   public generateLoginToken = async (userInfo: User): Promise<string> => {
 
-    const {id, username} = userInfo;
-
-    const [userProfile] = await db.selectQuery('SELECT * FROM user_profiles WHERE id=$1', id);
-
-    if (!userProfile) {
-      throw new Error('user profile not found');
-    }
-
-    const { thumbnail } = userProfile;
+    const {id, username, thumbnail} = userInfo;
 
     const user = {
       id,
@@ -62,3 +54,5 @@ class Token {
     return this.generate({ user });
   }
 }
+
+export default new Token();
