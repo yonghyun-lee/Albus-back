@@ -100,6 +100,7 @@ class AuthenticationController implements Controller {
         token
       });
     } catch (e) {
+      console.error(e);
       res.sendStatus(500);
     }
   };
