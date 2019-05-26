@@ -6,7 +6,7 @@ class SocialRegisterBodyDto {
   @IsNotEmpty()
   public accessToken: string;
 
-  @Matches(/^[a-z0-9-_]+$/)
+  @Matches(/^[가-힣]+$/)
   @MinLength(3)
   @MaxLength(16)
   username: string;

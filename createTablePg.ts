@@ -21,8 +21,9 @@ export const createUserTable = async () => {
       social_accounts (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         user_id UUID NOT NULL,
-        social_id VARCHAR(30) NOT NULL,
-        access_token text
+        social_id VARCHAR(30) NOT NULL UNIQUE,
+        access_token text,
+        constraint user_id_fk foreign key(user_id) references users(id)
       )`;
 
   try {

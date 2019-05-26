@@ -1,6 +1,9 @@
-import {IsEmail, Length, Matches, MaxLength, MinLength} from 'class-validator';
+import {IsEmail, IsString, Matches, MaxLength, MinLength} from 'class-validator';
 
 class UserBodyDto {
+
+  @IsString()
+  public accessToken: string;
 
   @Matches(/^[a-z0-9-_]+$/)
   @MinLength(3)
