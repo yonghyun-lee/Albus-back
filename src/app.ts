@@ -18,8 +18,11 @@ class App {
   }
 
   private initializeMiddleware() {
+    this.app.use(cors({
+      credentials : true,
+      origin: 'http://localhost:3000'
+    }));
     this.app.use(App.loggerMiddleware);
-    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(cookieParser());

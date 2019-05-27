@@ -91,7 +91,7 @@ class AuthenticationController implements Controller {
       res.cookie('access_token', token, {
         httpOnly: true, // XSS 방지
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7d
-        domain: process.env.NODE_ENV === 'development' ? undefined : 'albus.io',
+        domain: process.env.NODE_ENV === 'development' ? "localhost:3000" : 'albus.io',
       });
 
       res.json({
