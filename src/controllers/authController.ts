@@ -89,9 +89,9 @@ class AuthenticationController implements Controller {
       const token = await Token.generateLoginToken(userInfo);
 
       res.cookie('access_token', token, {
-        httpOnly: true, // XSS 방지
+        // httpOnly: true, // XSS 방지
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7d
-        domain: process.env.NODE_ENV === 'development' ? "localhost:3000" : 'albus.io',
+        // domain: process.env.NODE_ENV === 'development' ? "localhost:3000" : 'albus.io',
       });
 
       res.json({

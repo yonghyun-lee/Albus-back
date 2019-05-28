@@ -11,7 +11,7 @@ export const authMiddleware = async (req: RequestWithUser, res: Response, next: 
   const header = req.header('Authorization');
   const parts = header ? header.split('Bearer ') : [];
 
-  const accessToken = parts[1] || null;
+  const accessToken = parts[1] || req.cookies.access_token;
 
   if (accessToken) {
     const secret = process.env.TOKEN_SECRET;
