@@ -1,10 +1,9 @@
 import RequestWithUser from "../interface/requestWithUser.interface";
 import {NextFunction, Response} from "express";
-import * as jwt from "jsonwebtoken";
-import DataStoredInToken from "../interface/dataStoredInToken.interface";
 import WrongAuthenticationTokenException from "../exceptions/WrongAuthenticationTokenException";
 import AuthenticationTokenMissingException from "../exceptions/AuthenticationTokenMissingException";
 import {db} from "@src/lib/postgresql";
+import token from "@src/lib/token";
 
 export const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   // header 에서 token 가져옴
@@ -14,9 +13,8 @@ export const authMiddleware = async (req: RequestWithUser, res: Response, next: 
   const accessToken = parts[1] || req.cookies.access_token;
 
   if (accessToken) {
-    const secret = process.env.TOKEN_SECRET;
     try {
-      const verificationResponse = jwt.verify(accessToken, secret) as DataStoredInToken;
+      const verificationResponse = await token.decode(accessToken);
       const id = verificationResponse.id;
       // const user = await UserModel.findById(id);
       const user = await db.selectQuery(`SELECT * FROM users WHERE id=$1`, id);
@@ -27,6 +25,7 @@ export const authMiddleware = async (req: RequestWithUser, res: Response, next: 
         next(new WrongAuthenticationTokenException());
       }
     } catch (error) {
+      console.error(error);
       next(new WrongAuthenticationTokenException());
     }
   } else {

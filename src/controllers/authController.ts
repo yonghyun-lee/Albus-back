@@ -16,6 +16,8 @@ import SocialProfileInterface from "@interface/socialProfile.interface";
 import NotRegisteredException from "@exceptions/NotRegisteredException";
 import Token from "@src/lib/token";
 import User from "@interface/user.interface";
+import {authMiddleware} from "@middleware/auth.middleware";
+import * as cors from "cors";
 
 class AuthenticationController implements Controller {
   public path = '/auth';
@@ -26,9 +28,10 @@ class AuthenticationController implements Controller {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/googleLogin`, validationMiddleware(SocialLogInDto), this.socialLogin);
     this.router.post(`${this.path}/register/local`, validationMiddleware(UserBodyDto), this.registerLocalAccount);
     this.router.post(`${this.path}/register/social`, validationMiddleware(SocialRegisterBodyDto), this.socialRegister);
+    this.router.post(`${this.path}/googleLogin`, validationMiddleware(SocialLogInDto), this.socialLogin);
+    this.router.post(`${this.path}/token`, authMiddleware, this.checkToken);
   }
 
   private socialLogin = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
@@ -209,6 +212,10 @@ class AuthenticationController implements Controller {
     } catch (e) {
       next(new InternalServerException(e));
     }
+  };
+
+  private checkToken = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
+    res.sendStatus(200);
   };
 
 }
