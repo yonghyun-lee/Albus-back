@@ -214,7 +214,7 @@ class AuthenticationController implements Controller {
   };
 
   private checkToken = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
-    res.sendStatus(200);
+    res.json(req.user);
   };
 
 }
