@@ -17,7 +17,6 @@ import NotRegisteredException from "@exceptions/NotRegisteredException";
 import Token from "@src/lib/token";
 import User from "@interface/user.interface";
 import {authMiddleware} from "@middleware/auth.middleware";
-import * as cors from "cors";
 
 class AuthenticationController implements Controller {
   public path = '/auth';
