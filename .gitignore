@@ -143,3 +143,9 @@ fabric.properties
 .idea/httpRequests
 
 test
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+build/
+dist/

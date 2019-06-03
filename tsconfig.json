@@ -9,11 +9,11 @@
     "baseUrl": "src",
     "paths": {
       "@src/*": ["./*"],
-      "@controllers/*": ["controllers/*"],
-      "@dto/*": ["dto/*"],
-      "@exceptions/*": ["exceptions/*"],
-      "@interface/*": ["interface/*"],
-      "@middleware/*": ["middleware/*"]
+      "@controllers/*": ["./controllers/*"],
+      "@dto/*": ["./dto/*"],
+      "@exceptions/*": ["./exceptions/*"],
+      "@interface/*": ["./interface/*"],
+      "@middleware/*": ["./middleware/*"]
     },
     "declaration": true,
     "sourceMap": true,
