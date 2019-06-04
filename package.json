@@ -8,6 +8,7 @@
   "scripts": {
     "test": "NODE_ENV=development ts-node ./src/server.ts",
     "start": "ts-node ./src/server.ts",
+    "initDB": "ts-node ./createTablePg.ts createUserTable"
   },
   "_moduleAliases": {
     "@src": "src",
