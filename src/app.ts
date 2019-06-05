@@ -20,7 +20,7 @@ class App {
   private initializeMiddleware() {
     this.app.use(cors({
       credentials : true,
-      origin: 'https://api.albus-service.ml'
+      origin: 'https://albus-service.ml'
     }));
     this.app.use(App.loggerMiddleware);
     this.app.use(bodyParser.json());
