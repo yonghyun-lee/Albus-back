@@ -1,6 +1,5 @@
 import * as jwt from 'jsonwebtoken'
 import User from "@interface/user.interface";
-import {db} from "@src/lib/postgresql";
 
 class Token {
   private readonly issuer: string;
