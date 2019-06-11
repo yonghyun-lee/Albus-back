@@ -47,6 +47,58 @@ export const createUserTable = async () => {
   }
 };
 
+export const createAlbumTable = async () => {
+  const client = await pool.connect();
+
+  const queryPicturesText =
+    `CREATE TABLE IF NOT EXISTS
+      pictures (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        path VARCHAR(30) NOT NULL UNIQUE,
+        user_id UUID NOT NULL,
+        constraint user_id_fk foreign key(user_id) references users(id)
+      )`;
+
+  const queryAlbumsText =
+    `CREATE TABLE IF NOT EXISTS
+      albums (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        name VARCHAR(30) NOT NULL UNIQUE,
+        user_id UUID NOT NULL,
+        constraint user_id_fk foreign key(user_id) references users(id)
+      )`;
+
+  const queryAlbumStoreText =
+    `CREATE TABLE IF NOT EXISTS
+      album_stores (
+        picture_id UUID NOT NULL,
+        album_id UUID NOT NULL,
+        constraint picture_id_fk foreign key(picture_id) references pictures(id),
+        constraint album_id_fk foreign key(album_id) references albums(id)
+      )`;
+
+  try {
+    console.log("start...");
+    await client.query('BEGIN');
+    await client.query(queryPicturesText);
+    await client.query(queryAlbumsText);
+    await client.query(queryAlbumStoreText);
+    await client.query('COMMIT');
+    console.log("success create Album Table");
+  } catch (e) {
+    console.error(e);
+    console.log("rollback start...");
+    try {
+      await client.query('ROLLBACK');
+      console.log("rollback success");
+    } catch (rollbackError) {
+      console.log('A rollback error occurred:', rollbackError);
+    }
+  } finally {
+    client.release();
+  }
+};
+
 export const dropTables = async (name: string) => {
 
   const client = await pool.connect();
