@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "NODE_ENV=development ts-node ./src/server.ts",
     "start": "NODE_ENV=production ts-node ./src/server.ts",
-    "initDB": "ts-node ./createTablePg.ts createUserTable"
+    "dbCreateUser": "ts-node ./createTablePg.ts createUserTable",
+    "dbCreateAlbum": "ts-node ./createTablePg.ts createUserTable"
   },
   "_moduleAliases": {
     "@src": "src",
