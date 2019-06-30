@@ -16,8 +16,8 @@ export const authMiddleware = async (req: RequestWithUser, res: Response, next: 
     try {
       const verificationResponse = await token.decode(accessToken);
       const id = verificationResponse.user.id;
-      // const user = await UserModel.findById(id);
       const user = await db.selectQuery(`SELECT * FROM users WHERE id=$1`, id);
+
       if (user) {
         req.user = user[0];
         next();

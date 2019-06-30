@@ -3,7 +3,7 @@ import * as express from "express";
 import RequestWithUser from "@interface/requestWithUser.interface";
 import {authMiddleware} from "@middleware/auth.middleware";
 
-class AuthenticationController implements Controller {
+class PictureController implements Controller {
   public path = '/picture';
   public router = express.Router();
 
@@ -17,8 +17,9 @@ class AuthenticationController implements Controller {
   }
 
   private uploadPictures = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
+    console.log(req.user);
     res.json(req.user);
   };
 }
 
-export default AuthenticationController;
+export default PictureController;

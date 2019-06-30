@@ -2,7 +2,6 @@ import Controller from "@interface/controller.interface";
 import * as express from "express";
 import {validationMiddleware} from "@middleware/validation.middleware";
 import RequestWithUser from "@interface/requestWithUser.interface";
-import UserBodyDto from "@dto/UserBody.dto";
 import { db } from "@src/lib/postgresql";
 import UsernameAlreadyExistsException from "@exceptions/UsernameAlreadyExistsException";
 import EmailAlreadyExistsException from "@exceptions/EmailAlreadyExistsException";
@@ -27,7 +26,6 @@ class AuthenticationController implements Controller {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/register/local`, validationMiddleware(UserBodyDto), this.registerLocalAccount);
     this.router.post(`${this.path}/register/social`, validationMiddleware(SocialRegisterBodyDto), this.socialRegister);
     this.router.post(`${this.path}/googleLogin`, validationMiddleware(SocialLogInDto), this.socialLogin);
     this.router.post(`${this.path}/token`, authMiddleware, this.checkToken);
@@ -52,8 +50,6 @@ class AuthenticationController implements Controller {
       return;
     }
 
-    // console.log(profile);
-
     const socialId = profile.id.toString();
     let user = [];
 
@@ -66,8 +62,6 @@ class AuthenticationController implements Controller {
         if (profile.email) {
           user = await db.selectQuery(`SELECT * FROM users WHERE email=$1`, profile.email);
         }
-
-        console.log(user);
 
         if (!user.length) {
           next(new NotRegisteredException(profile.email));
@@ -87,7 +81,6 @@ class AuthenticationController implements Controller {
       user = await db.selectQuery(`SELECT * FROM users WHERE id=$1`, socialUser[0].user_id);
       const userInfo: User = user[0];
 
-      console.log(userInfo);
       const token = await Token.generateLoginToken(userInfo);
 
       res.cookie('access_token', token, {
@@ -107,21 +100,6 @@ class AuthenticationController implements Controller {
     } catch (e) {
       console.error(e);
       res.sendStatus(500);
-    }
-  };
-
-  private registerLocalAccount = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
-    const {username, email, accessToken}: UserBodyDto = req.body;
-
-    const isUsername = await db.selectQuery(`SELECT * FROM users WHERE username=$1`, username);
-    const isEmail = await db.selectQuery(`SELECT * FROM users WHERE email=$1`, email);
-
-    try {
-      // todo 이메일 인증을 통한 회원가입
-
-    } catch (e) {
-      next(new InternalServerException(e));
-
     }
   };
 
