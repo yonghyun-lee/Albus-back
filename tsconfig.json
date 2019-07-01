@@ -13,7 +13,8 @@
       "@dto/*": ["./dto/*"],
       "@exceptions/*": ["./exceptions/*"],
       "@interface/*": ["./interface/*"],
-      "@middleware/*": ["./middleware/*"]
+      "@middleware/*": ["./middleware/*"],
+      "@root/*": ["../*"]
     },
     "declaration": true,
     "sourceMap": true,

@@ -143,3 +143,4 @@ fabric.properties
 .idea/httpRequests
 
 test
+uploads/*
