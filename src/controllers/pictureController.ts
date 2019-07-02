@@ -31,7 +31,6 @@ class PictureController implements Controller {
   }
 
   private uploadPictures = async (req: RequestWithUser, res: express.Response, next: express.NextFunction) => {
-    console.log(req.files);
     res.json(req.user);
   };
 }
